@@ -71,3 +71,6 @@ class BasePage(object):
                 pass
         raise StaleTimeoutExeption(
             f"{locator} did not clickable or have been throwing StaleElementReferenceExceptions in {timeout} sec, current url {self.driver.current_url}")
+
+    def is_url(self, path):
+        return EC.url_matches(urlparse.urljoin(self.BASE_URL, path))
