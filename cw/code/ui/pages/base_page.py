@@ -22,6 +22,9 @@ class BasePage(object):
             if self.driver.current_url == self.url:
                 return True
         raise PageNotOpenedExeption(f'{self.url} did not open in {timeout} sec, current url {self.driver.current_url}')
+    
+    def refresh(self):
+            self.driver.refresh()
 
     def __init__(self, driver):
         self.driver = driver

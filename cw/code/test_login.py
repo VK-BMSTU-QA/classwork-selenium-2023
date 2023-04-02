@@ -54,7 +54,10 @@ def cookies(credentials, config):
 
 
 class MainPage(BasePage):
-    url = 'https://target-sandbox.my.com/'
+    url = 'https://target-sandbox.my.com/dashboard'
+
+    def move_to(self, locator):
+        self.click(locator)
 
 
 class LoginPage(BasePage):
@@ -67,12 +70,7 @@ class LoginPage(BasePage):
 
         self.click((By.XPATH, '/html/body/div[2]/div/div[2]/div/div[4]/div[1]'))
 
-        return DashboardPage(self.driver)
-
-
-class DashboardPage(BasePage):
-    url = 'https://target-sandbox.my.com/dashboard'
-
+        return MainPage(self.driver)
 
 class ContactsPage(BasePage):
     url = 'https://target-sandbox.my.com/profile/contacts'
@@ -81,6 +79,7 @@ class ContactsPage(BasePage):
         self.driver = driver
         self.driver.get(self.url)
         self.is_opened()
+
 
 
 
@@ -103,28 +102,13 @@ class TestHeader(BaseCase):
             )
             ,
             pytest.param(
-                MainPageLocators.TOOLS_LOCATOR, 'https://target-sandbox.my.com/tools/feeds'
+                MainPageLocators.TOOLS_LOCATOR, 'https://target-sandbox.my.com/tools'
             )
         ]
     )
     def test_move_to(self, locator_field, url):
         self.main_page.move_to(locator_field)
         assert self.driver.current_url.startswith(url)
-
-    # def test_header(self):
-    #     timeout = 15
-    #     page = DashboardPage(self.driver)
-
-    #     url = 'https://target-sandbox.my.com/billing'
-    #     page.click((By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[2]/ul/li[3]/a'), timeout)
-    #     if not page.driver.current_url.startswith(url):
-    #         raise PageNotOpenedExeption(f'{url} did not open in {timeout} sec, current url {self.driver.current_url}')
-
-    #     url = 'https://target-sandbox.my.com/profile'
-    #     page.click((By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[2]/ul/li[6]/a'), timeout)
-    #     if not page.driver.current_url.startswith(url):
-    #         raise PageNotOpenedExeption(f'{url} did not open in {timeout} sec, current url {self.driver.current_url}')
-
 
 class TestContacts(BaseCase):
     authorize = True
