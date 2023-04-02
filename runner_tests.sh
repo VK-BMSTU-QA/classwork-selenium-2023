@@ -1,1 +1,1 @@
-pytest cw/code
+pytest cw/code/
