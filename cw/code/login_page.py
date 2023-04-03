@@ -1,23 +1,28 @@
-import time
-from selenium import webdriver
+from base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import pytest
 
 LOGINCLASS = 'responseHead-module-button-2yl51i'
 LOGIN = 'authForm-module-button-1u2DYF'
 EMAIL = 'email'
 PASSWORD = 'password'
 
+class LoginLocators:
+    LOGIN_BUTTON_MAIN_PAGE = (By.CLASS_NAME, 'responseHead-module-button-2yl51i')
+    EMAIL_INPUT = (By.XPATH, '//input[@name="email"]')
+    PASSWORD_INPUT = (By.XPATH, '//input[@name="password"]')
+    LOGIN_BUTTON = (By.CLASS_NAME, 'authForm-module-button-1u2DYF')
 
-class LoginPage:
+
+class LoginPage(BasePage):
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
         self.email_field = (By.XPATH, f'//input[@name="{EMAIL}"]')
         self.password_field = (By.XPATH, f'//input[@name="{PASSWORD}"]')
         self.login_button = (By.CLASS_NAME, LOGINCLASS)
-        self.login = (By.CLASS_NAME, LOGIN)
+        self.log_in = (By.CLASS_NAME, LOGIN)
+        self.url = 'https://target-sandbox.my.com/'
 
     def enter_username(self, username):
         email_field = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located(self.email_field))
@@ -31,24 +36,16 @@ class LoginPage:
         login_button = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located(button))
         login_button.click()
 
+    def login(self):
+        if not self.is_logged:
+            self.render(self.url)
 
+            self.click(self.login_button)
+            self.enter_username("ivan.milchenko.92@mail.ru")
+            self.enter_password("i!N9&vG^TA^v3toD7zUk9D9rpidJ@#v4")
+            self.click(self.log_in)
+            
+            self.is_logged = True
 
-@pytest.fixture(scope="session")
-def browser():
-    driver = webdriver.Firefox()
-    driver.set_window_size(1920, 1080)
-    yield driver
-    driver.quit()
+            self.driver.refresh()
 
-
-class TestLoginPage:
-    def test_login(self, browser):
-        login_page = LoginPage(browser)
-        browser.get("https://target-sandbox.my.com/")
-
-        login_page.click(login_page.login_button)
-        login_page.enter_username("ivan.milchenko.92@mail.ru")
-        login_page.enter_password("i!N9&vG^TA^v3toD7zUk9D9rpidJ@#v4")
-        login_page.click(login_page.login)
-
-        assert browser.current_url == "https://target-sandbox.my.com/dashboard"
