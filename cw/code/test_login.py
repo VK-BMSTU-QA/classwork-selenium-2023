@@ -17,3 +17,5 @@ class TestLogin(BaseCase):
         self.page.send_keys(
             self.page.locators.PASSWORD_INPUT, BaseCase.PASSWORD)
         self.page.click(self.page.locators.LOGIN_BUTTON_FORM)
+        assert str(self.driver.current_url) == self.page.afterLoginURL
+

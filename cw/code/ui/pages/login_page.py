@@ -4,6 +4,7 @@ from ui.base_case.base_case import BaseCase
 
 
 class LoginPage(BasePage):
+    afterLoginURL = "https://target-sandbox.my.com/dashboard"
     locators = LoginLocators
 
     def login(self):

@@ -13,8 +13,8 @@ class BasePageLocators:
 
 
 class LoginLocators:
-    LOGIN_BUTTON = (By.CLASS_NAME, 'responseHead-module-button-2yl51i')
-    LOGIN_BUTTON_FORM = (By.CLASS_NAME, 'authForm-module-button-1u2DYF')
+    LOGIN_BUTTON = (By.XPATH, '//div[text() = "Войти"][1]')
+    LOGIN_BUTTON_FORM = (By.XPATH, '(//div[text() = "Войти"])[2]')
     EMAIL_INPUT = (By.XPATH, '//input[@name="email"]')
     PASSWORD_INPUT = (By.XPATH, '//input[@name="password"]')
 
