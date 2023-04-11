@@ -1,6 +1,7 @@
 import pytest
 from ui.pages.authorize_page import AuthorizePage
 from ui.base_case.base_case import BaseCase
+from ui.paths import paths
 
 
 class TestAuthorize(BaseCase):
@@ -14,3 +15,4 @@ class TestAuthorize(BaseCase):
         self.page.send_keys(self.page.locators.INPUT_EMAIL, BaseCase.EMAIL)
         self.page.send_keys(self.page.locators.INPUT_PASSWORD, BaseCase.PASSWORD)
         self.page.click(self.page.locators.LOGIN_BUTTON_FORM)
+        assert self.page.is_url(paths.DASHBOARD)

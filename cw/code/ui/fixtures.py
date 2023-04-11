@@ -6,14 +6,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
-PHONE = os.getenv('PHONE')
-CODE = os.getenv('CODE')
-
-
 def get_driver(browser_name):
     if browser_name == "chrome":
         chrome_options = Options()

@@ -10,9 +10,12 @@ class TestHeader(BaseCase):
         self.driver = driver
         self.page = HeaderPage(driver, url_config)
 
-    def test_header(self):
+    def test_billing(self):
         self.page.authorize()
         self.page.click(self.page.locators.BILLING_BUTTON)
+        assert self.page.is_url(paths.BILLING)
+
+    def test_profile(self):
+        self.page.authorize()
         self.page.click(self.page.locators.PROFILE_BUTTON)
         assert self.page.is_url(paths.PROFILE)
-        

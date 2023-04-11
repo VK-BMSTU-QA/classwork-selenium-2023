@@ -74,3 +74,6 @@ class BasePage(object):
 
     def is_url(self, path):
         return EC.url_matches(urlparse.urljoin(self.BASE_URL, path))
+
+    def find(self, locator, timeout=default_timeout):
+            return self.wait(timeout).until(EC.presence_of_element_located(locator))

@@ -6,10 +6,10 @@ class BasePageLocators:
 
 
 class AuthorizeLocators:
-    LOGIN_BUTTON = (By.CLASS_NAME, 'responseHead-module-button-2yl51i')
-    LOGIN_BUTTON_FORM = (By.CLASS_NAME, 'authForm-module-button-1u2DYF')
-    INPUT_EMAIL = (By.CLASS_NAME, 'authForm-module-input-3j70Dv')
-    INPUT_PASSWORD = (By.CLASS_NAME, 'authForm-module-inputPassword-3t7Qac')
+    LOGIN_BUTTON = (By.XPATH, '//div[starts-with(@class, "responseHead-module-button")]')
+    LOGIN_BUTTON_FORM = (By.XPATH, '//div[starts-with(@class,"authForm-module-button")]')
+    INPUT_EMAIL = (By.NAME, 'email')
+    INPUT_PASSWORD = (By.NAME, 'password')
 
 class HeaderLocators:
     BILLING_BUTTON = (By.XPATH, '//a[@href="/billing"]')
@@ -18,10 +18,6 @@ class HeaderLocators:
 class ContactLocators:
     FIO_INPUT = (
             By.XPATH,
-            "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/ul/li[2]/div[1]/div/div/"
-            "input"
+            '//div[starts-with(@class, "js-contacts-field-name")]/div/div/input'
         )
-    SAVE_BUTTON = (
-        By.XPATH,
-        "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/button"
-    )
+    SAVE_BUTTON = (By.XPATH, '//button[contains(@class, "button_submit")]')
