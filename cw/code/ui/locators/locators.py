@@ -13,8 +13,8 @@ class BasePageLocators:
 
 
 class LoginLocators:
-    LOGIN_BUTTON = (By.XPATH, '//div[text() = "Войти"][1]')
-    LOGIN_BUTTON_FORM = (By.XPATH, '(//div[text() = "Войти"])[2]')
+    LOGIN_BUTTON = (By.XPATH, '//div[contains(@class, "responseHead-module-button")]')
+    LOGIN_BUTTON_FORM = (By.XPATH, '//div[contains(@class, "authForm-module-button")]')
     EMAIL_INPUT = (By.XPATH, '//input[@name="email"]')
     PASSWORD_INPUT = (By.XPATH, '//input[@name="password"]')
 
@@ -22,4 +22,4 @@ class LoginLocators:
 class ProfileLocators:
     NAME_INPUT = (By.XPATH, '//div[@class="input" and @data-name = "fio"]/div/input')
     PHONE_NUMBER_INPUT = (By.XPATH, '//div[@data-name="phone"]/div/input')
-    SAVE_BUTTON = (By.XPATH, '//div[text() = "Сохранить"]')
+    SAVE_BUTTON = (By.XPATH, '//div[contains(@class, "Submit")]/div')
